@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen&family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <div class="store">
+
+            <!--------store content-------->
+            <div id="store-window">
+                <!--------changing window-->
+                <div id="changing-div">
+                </div>
+            </div>
+
+            <!------------input form----------->
+            <div class="functions">
+                <form>
+                    <div class="formbox">
+                        <input type="text" id="addtoinventory" placeholder="add article"/>
+                    </div>
+                    <div class="formbox">
+                        <button id="formbutton">add</button>
+                    </div>
+                    <div id="msg">
+                        <pre></pre>
+                    </div>
+                </form>
+
+                <!------------funktioner----------->
+                    <button onclick="showItemList()">show item list</button>
+                    <button onclick="showCart()">show cart</button>
+                    <button onclick="printSame()">visa</button>
+        
+                    <div id="showcart"><!---input--></div>
+                    <div id="itemlist"></div>
+                    <div id="hitta"></div>
+                </div>
+        </div>
+    </main>
+</body>
+</html>

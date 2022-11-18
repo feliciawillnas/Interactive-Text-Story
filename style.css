@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+}
+
+body {
+    background-color: rgb(222, 228, 255);
+    font-family: 'Silkscreen';
+    font-size: 11px;
+}
+
+header {
+    height: 250px;
+}
+
+main {
+    background-color: aliceblue;
+    width: fit-content; 
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.store {
+    width: 400px;
+    padding: 20px;
+}
+
+#store-window {
+    display: block;
+    padding: 20px;
+    border: 1px solid black;
+    width: 200;
+    height: fit-content; 
+}
+
+.entrancebutton {
+    text-align: center;
+}
+
+button {
+    background-color: aliceblue; 
+    color: black;
+    border: 1px solid black;
+    padding: 5px 5px;
+    font-size: 9px;
+    cursor: pointer;
+    font-family: 'Silkscreen'; 
+    display: inline;
+    margin-top: 5px;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+/**********funktioner********/
+#itemlist {
+    width: 200px;
+    border: 1px solid black;
+    margin-top: 2px;
+    display: none;
+}
+
+#showcart {
+    width: fit-content;
+    border: 1px solid black;
+    margin-top: 2px;
+    display: none;
+}
+
+/*****input fältet*****/
+input[type="text"]
+{
+    font-family: 'Silkscreen'; 
+    font-size: 9px;
+    padding: 5px 5px;
+    background-color: aliceblue;
+}
+
+.formbox { /****så att submit knappen är bredvid input*****/
+    display: inline;
+}
+
+/******javascript klasser********/
+
+.return-button {
+    margin-left: 10px;
+}
+
+.all-buttons {
+    align-items: center;
+}
