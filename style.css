@@ -37,10 +37,6 @@ h1 {
     height: fit-content; 
 }
 
-.entrancebutton {
-    text-align: center;
-}
-
 button {
     background-color: aliceblue; 
     color: black;
@@ -74,10 +70,6 @@ input[type="text"]
     font-size: 9px;
     padding: 5px 5px;
     background-color: aliceblue;
-}
-
-.formbox { /****så att submit knappen är bredvid input*****/
-    display: inline;
 }
 
 /******javascript klasser********/
