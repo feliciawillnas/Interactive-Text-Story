@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", main);
  let inventory= []
 
  /**
- * Startinnehåll 
+ * Dessa funktioner körs direkt på sidan
  * 
  */
 function main() {
@@ -18,7 +18,7 @@ function main() {
  * Startinnehåll med allmän information till användaren.
  * Funktionen utgår från changing-div klassen i HTML och tömmer denna och fyller den med nytt innehåll 
  * beroende på val användaren gjort. 
- * Detta innehållet är automatiskt och startinnehållet på sidan om användaren väljer att klicka sig vidare. 
+ * Detta innehållet är automatiskt och startinnehållet på sidan. 
  * 
  */
 function changingDiv() {
@@ -36,8 +36,8 @@ function changingDiv() {
 }
 
 /**
- * Scen 2 / fruktsektionen i butiken 
- * 
+ * Scen 2 / fruktsektionen i butiken om användaren valde "continue" under förra funktionen. 
+ * Alternativt har användaren återkommit hit från scen 3 
  */
 function fruitSection() {
 
@@ -45,7 +45,7 @@ function fruitSection() {
      * Array containing the available items 
      * @type {Array}
      */
-    let availableItems = ["apple", "pear", "banana", "kiwi"]
+     let availableItems = ["apple", "banana", "bread", "pear"];
 
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
@@ -67,7 +67,12 @@ function fruitSection() {
     document.getElementById("changing-div").append(h1, p, button, returnButton); 
 }
 
+/**
+ * Scen 2 / fruktsektionen i butiken om användaren valde "continue" under förra funktionen. 
+ * Alternativt har användaren återkommit hit från scen 3 
+ */
 function breadSection() {
+
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
     const button = document.createElement("button"); 
@@ -115,16 +120,33 @@ function addItem() {
     
     inputButton.textContent = "add";
     inputButton.onclick = addToInventory; 
+
 }
 
 /**
- * Adds user input onto inventory list. 
+ * Adds user input onto inventory list, if item is available. 
+ * Otherwise error meddelande 
  * 
  */
 function addToInventory() {
-    x = input.value //sparar 
-    inventory.push(x);
-    input.value = ""; //tömmer 
+    const p = document.createElement("p"); 
+
+    let availableItems = ["apple", "banana", "bread", "pear"];
+    pickedItem = input.value //sparar 
+
+    for( let i=0;i<=availableItems.length;i++)    
+     {if (pickedItem === availableItems[i]) 
+    {
+        input.value = ""; 
+        inventory.push(pickedItem);
+         break;
+    } }
+
+    for( let i=0;i<=availableItems.length;i++)    
+    {if (pickedItem !== availableItems[i]) 
+   {
+       input.value = ""; 
+   } }
 }
 
 /**
