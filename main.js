@@ -6,7 +6,6 @@ window.addEventListener("DOMContentLoaded", main);
  * @type {Array} 
  */
  let inventory = []; 
- let ramdomNum = getRandom 
 
  /**
  * Main funktionen körs direkt då sidan laddats och kör i sin tur changingDiv och addItem. 
@@ -24,15 +23,17 @@ function main() {
 function changingDiv() {
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
+    const buttonInformation = document.createElement("p"); 
     const button = document.createElement("button"); 
 
     h1.textContent = "welcome to our grocery store!"; 
-    p.textContent = 'info on how the store works: to view your shopping cart press "show cart", to add items simply write them in the input field below and press add. if you wish to enter the store press the button below';  
+    p.textContent = 'to view your shopping cart press "show cart", to add items simply write them in the input field below and press add. to view items in your cart, click show cart. if you have recently added an item you must close the cart and open it once more, to see the newly added item.';  
+    buttonInformation.textContent = "if you wish to enter the store press the button below"; 
     button.textContent = "enter"; 
     button.onclick = fruitSection; 
 
     document.getElementById("changing-div").innerHTML = "";
-    document.getElementById("changing-div").append(h1, p, button); 
+    document.getElementById("changing-div").append(h1, p, buttonInformation, button); 
 }
 
 /**
@@ -44,7 +45,7 @@ function changingDiv() {
      * Array containing the available items 
      * @type {Array}
      */
-     let availableItems = ["apple", "banana", "bread", "pear"];
+     let availableItems = ["apple", "banana", "kiwi", "pear"];
 
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
@@ -55,7 +56,7 @@ function changingDiv() {
     returnButton.classList = "return-button all-buttons"
 
     h1.textContent = "fruit section"; 
-    p.textContent = "you have arrived at the fruit section, here are the available fruits for purchase: " + availableItems +  "enter what items you would like to add to your cart in the input field and press add."; 
+    p.textContent = "you have arrived at the fruit section, here are the available fruits for purchase: " + availableItems; 
     button.textContent = "continue"; 
     returnButton.textContent ="return"; 
 
@@ -75,7 +76,7 @@ function breadSection() {
      * Array containing the available items 
      * @type {Array}
      */
-    let availableItems = ["knäckebröd"];
+    let availableItems = ["pastries", "crackers", "toast", "sourdough bread"];
 
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
@@ -85,8 +86,8 @@ function breadSection() {
     button.classList = "all-buttons"
     returnButton.classList = "return-button all-buttons"
 
-    h1.textContent = "bread section"; 
-    p.textContent = "available bread" + availableItems; 
+    h1.textContent = "bakery products"; 
+    p.textContent = "you have arrived at the bakery product section of the store. here are the bakery type items we have for sale: " + availableItems; 
     button.textContent = "continue"; 
     returnButton.textContent ="return"; 
 
@@ -112,8 +113,8 @@ function beverageSection() {
     button.classList = "all-buttons"
     returnButton.classList = "return-button all-buttons"
 
-    h1.textContent = "sweets section"; 
-    p.textContent = "available sweets" + availableItems; 
+    h1.textContent = "beverages"; 
+    p.textContent = "you have arrived at the section that sells beverages, cold and hot! here are the available items for sale: " + availableItems; 
     button.textContent = "continue"; 
     returnButton.textContent ="return"; 
 
@@ -128,6 +129,8 @@ function beverageSection() {
  * Scen 5. 
  */
 function paymentSection() {
+    total = getRandomNum(); 
+
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
     const button = document.createElement("button"); 
@@ -136,18 +139,21 @@ function paymentSection() {
     button.classList = "all-buttons"
     returnButton.classList = "return-button all-buttons"
 
-   h1.textContent = "payment"; 
-    p.textContent = "hi, your sum is how would you like to pay?"; 
+    h1.textContent = "register"; 
+    p.textContent = "hi, thank you for shopping at our store, you have: " + inventory + " in your cart. your total is: " + total + "kr, how would you like to pay?"; 
     button.textContent = "cash"; 
     returnButton.textContent ="card"; 
 
     button.onclick = end; 
-    returnButton.onclick = breadSection; 
+    returnButton.onclick = end; 
 
     document.getElementById("changing-div").innerHTML = "";
     document.getElementById("changing-div").append(h1, p, button, returnButton); 
 }
 
+/**
+ * Scen 6. 
+ */
 function end() {
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
@@ -155,7 +161,7 @@ function end() {
 
     button.classList = "all-buttons"
 
-    h1.textContent = "thank you"; 
+    h1.textContent = "thank you!"; 
     p.textContent = "would you like to visit the store again?"; 
     button.textContent = "yes"; 
 
@@ -163,7 +169,10 @@ function end() {
 
     document.getElementById("changing-div").innerHTML = "";
     document.getElementById("changing-div").append(h1, p, button); 
+
+    inventory = []
 }
+
 /**
  * Knappfunktion som tar emot användarens input och leder vidare till funktionen som hanterar inputen. 
  */
@@ -176,41 +185,29 @@ function addItem() {
 }
 
 /**
- * Hanterar inputen från föregående funktion. 
- * Lägger till vad användaren skrivit i "inventory" OM denna artikel finns bland "availableItems"-listan. 
+ * Hanterar inputen från addItem funktionen. 
+ * 
+ * Lägger till vad användaren skrivit i "inventory" OM denna artikel finns bland "allItems"-listan. 
+ * "allItems"-listan är alla "availableItems"-listor tillsammans.
  * Om inte får användaren ett felmeddelande. 
  */
 function addToInventory() {
-    const p = document.createElement("p"); 
     /** 
      * Array containing the available items 
      * @type {Array}
      */
-    let allItems = ["apple", "banana", "bread", "pear"];
-    pickedItem = input.value //sparar 
+    let allItems = ["apple", "banana", "bread", "pear", "pastries", "crackers", "toast", 
+    "sourdough bread", "coca cola", "coffee", "sprite", "wine" ];
+    pickedItem = input.value
 
-    for( let i = 0; i < allItems.length; i++){
-        
-        if(allItems[i] == pickedItem){
-            inventory.push(pickedItem);
-
-        } else {
-            console.log("fel");
-        }
-/*         if (pickedItem !== allItems[i]){
-            console.log("fel");
-            //alert("fel")
-            //input.value = ""; 
-
-     } else {
+    if(allItems.includes(pickedItem)){
         inventory.push(pickedItem);
-
-       // input.value = ""; 
-     }
+        input.value = "";
+    } else{
+        alert ("unavailable item");
+        input.value = "";
     }
-    console.log(inventory); */
-} console.log(inventory);
-}
+} 
 
 /**
  * Visa varukorg 
@@ -228,10 +225,12 @@ function showCart() {
     else {
       showInventory.style.display = "block";
     }
-  }
-  
-  function getRandom() {
-    randomNum = Math.floor(Math.random() * 101);
-    return random
-    console.log (randomNum)
-  }
+}
+
+/**
+ * Genererar ett slumpat nummer mellan 0 och 100. 
+ */
+function getRandomNum() {
+    return Math.floor(Math.random() * 101);
+}
+
