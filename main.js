@@ -242,7 +242,7 @@ function showCart() {
 }
 
 /**
- * Genererar ett slumpat nummer mellan 0 och 100. 
+ * @return {Math.floor(Math.random() * 101)} ett slumpat nummer mellan 0 och 100. 
  */
 function getRandomNum() {
     return Math.floor(Math.random() * 101);
