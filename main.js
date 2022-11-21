@@ -1,30 +1,30 @@
 window.addEventListener("DOMContentLoaded", main); 
 
 /**
- * array som sparar användar input 
+ * Array som sparar användar input 
  * @type {Array} 
  */
- let inventory= [];
+ let inventory= []
+
  /**
-  * hårdkodade värden 
-  * @type {Array} 
-  */
- let desiredItems = ["apple", "bread", "pear"];
- 
+ * Startinnehåll 
+ * 
+ */
 function main() {
-    changingDiv(); 
+    changingDiv(), addItem(); 
 } 
 
 /**
- * Startinnehåll 
+ * Startinnehåll med allmän information till användaren.
+ * Funktionen utgår från changing-div klassen i HTML och tömmer denna och fyller den med nytt innehåll 
+ * beroende på val användaren gjort. 
+ * Detta innehållet är automatiskt och startinnehållet på sidan om användaren väljer att klicka sig vidare. 
  * 
  */
 function changingDiv() {
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
     const button = document.createElement("button"); 
-
-    ///rensa changing-div samt fylla i den
 
     h1.textContent = "welcome"; 
     p.textContent = "entrance to store"; 
@@ -35,17 +35,28 @@ function changingDiv() {
     document.getElementById("changing-div").append(h1, p, button); 
 }
 
+/**
+ * Scen 2 / fruktsektionen i butiken 
+ * 
+ */
 function fruitSection() {
+
+    /** 
+     * Array containing the available items 
+     * @type {Array}
+     */
+    let availableItems = ["apple", "pear", "banana", "kiwi"]
+
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
     const button = document.createElement("button"); 
-    const returnButton= document.createElement("button"); 
+    const returnButton = document.createElement("button"); 
 
     button.classList = "all-buttons"
     returnButton.classList = "return-button all-buttons"
 
     h1.textContent = "fruit section"; 
-    p.textContent = "available fruitsavailable fruitsavailable fruitsavailable fruitsavailable fruitsavailable fruitsavailable fruitsavailable fruits"; 
+    p.textContent = "here are the available fruits: " + availableItems; 
     button.textContent = "continue"; 
     returnButton.textContent ="return"; 
 
@@ -97,72 +108,40 @@ function sweetsSection() {
     document.getElementById("changing-div").innerHTML = "";
     document.getElementById("changing-div").append(h1, p, button, returnButton); 
 }
-/**
- * Statiska knapp-funktioner 
- * Funktion som tar emot värdet av "inventory" och "desiredItems" och jämför dessa arrays med 
- * varandra. 
- */
-function printSame() {
 
-  found = inventory.filter((val, index) => {
-    return desiredItems.includes(val)
-  })
-  document.getElementById("hitta").innerHTML = "hittade: " + found; 
+function addItem() {
+    const button = document.getElementById("inputButton"); 
+    const input = document.getElementById("input"); 
+    
+    inputButton.textContent = "add";
+    inputButton.onclick = addToInventory; 
 }
 
 /**
- * Tar emot input från form, sparar värdet i "inventory."
- */
-const addItem = (x)=>{ //////lägg i varukorg
-    x.preventDefault();  
-    let addedItem = document.getElementById('addtoinventory').value
-
-    inventory.push(addedItem);
-    document.forms[0].reset(); 
-
-    localStorage.setItem('MyItemList', JSON.stringify(inventory));
-}
-document.addEventListener('DOMContentLoaded', ()=>{
-document.getElementById('formbutton').addEventListener('click', addItem);
-});
-
-function showItemList() { ///////visa inköpslista 
-    var k = (desiredItems); 
-    x = document.getElementById("itemlist");
-
-    document.getElementById("itemlist").innerHTML = "item list: " + k; 
-
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    } 
-    else {
-      x.style.display = "block";
-    }
-
-    found = inventory.filter((val, index) => { /////visa vilka produkter från inköpslistan som finns i varukorgen 
-      console.log('index', index) 
-      return desiredItems.includes(val)
-    })
-    console.log(found)
-  
-    document.getElementById("hitta").innerHTML = "hittade: " + found; 
-  }
- 
-/**
- * * Knappfunktion där innehåll gömmer sig bakom en knapp till man klickar på den. 
- * Skriver ut nuvarande innehåll av "inventory."
+ * Adds user input onto inventory list. 
  * 
  */
-function showCart() { //////visa varukorg
-    var cart = (inventory); 
-    x = document.getElementById("showcart");
+function addToInventory() {
+    x = input.value //sparar 
+    inventory.push(x);
+    input.value = ""; //tömmer 
+}
 
-    document.getElementById("showcart").innerHTML = "your cart: " + cart; 
+/**
+ * * Visa varukorg 
+ * nappfunktion där användarens varukorg visas då man klickar på knappen
+ */
+function showCart() {
+    let addedItem = (inventory); 
+    showInventory = document.getElementById("showcart");
 
-    if (x.style.display === "block") {
-      x.style.display = "none";
+    document.getElementById("showcart").innerHTML = "your cart: " + addedItem; 
+
+    if (showInventory.style.display === "block") {
+      showInventory.style.display = "none";
     } 
     else {
-      x.style.display = "block";
+      showInventory.style.display = "block";
     }
   }
+  
