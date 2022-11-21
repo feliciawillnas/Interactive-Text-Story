@@ -8,14 +8,14 @@ window.addEventListener("DOMContentLoaded", main);
  let inventory = []; 
 
  /**
- * Main funktionen körs direkt då sidan laddats och kör i sin tur changingDiv och addItem. 
+ * Main funktionen körs direkt då sidan laddats och kör i sin tur changingDiv och addItem funktionerna. 
  */
 function main() {
     changingDiv(), addItem(); 
 } 
 
 /**
- * Tömmer och fyller på div från HTML med id: "changing-div". 
+ * Tömmer och fyller på div med id: "changing-div". 
  * Scen 1 / Startinnehåll med allmän information till användaren, hur sidan kommmer att fungera. 
  * Alla kommande funktioner kommmer utgå från samma "changing-div" ID. 
  * Innehållet kommer förändras beroende på val användaren gör, men all information töms och skrivs ut i "changing-div."
@@ -27,7 +27,7 @@ function changingDiv() {
     const button = document.createElement("button"); 
 
     h1.textContent = "welcome to our grocery store!"; 
-    p.textContent = 'to view your shopping cart press "show cart", to add items simply write them in the input field below and press add. to view items in your cart, click show cart. if you have recently added an item you must close the cart and open it once more, to see the newly added item.';  
+    p.textContent = 'to view your shopping cart press "show cart", to add items simply write them in the input field below and press add. if you have recently added an item you must close the cart and open it once more, to see the newly added item.';  
     buttonInformation.textContent = "if you wish to enter the store press the button below"; 
     button.textContent = "enter"; 
     button.onclick = fruitSection; 
@@ -103,6 +103,10 @@ function breadSection() {
  * Scen 4. 
  */
 function beverageSection() {
+    /**
+     * Array containing the available items 
+     * @type {Array}
+     */
     let availableItems = ["coca cola", "coffee", "sprite", "wine"]; 
 
     const h1 = document.createElement("h1"); 
@@ -127,9 +131,14 @@ function beverageSection() {
 
 /**
  * Scen 5. 
+ * Skriver ut en scen som utspelar sig i kassan. 
+ * Samlad input i listan "inventory" skrivs som varukorgsinnehåll och det slumpmässiga talet i "total" skrivs ut som priset på varorna. 
  */
 function paymentSection() {
-    total = getRandomNum(); 
+    /**
+     * Sparar värdet av funktionen "getRandom" i variabeln "total."
+     */
+    let total = getRandomNum(); 
 
     const h1 = document.createElement("h1"); 
     const p = document.createElement("p"); 
@@ -153,6 +162,8 @@ function paymentSection() {
 
 /**
  * Scen 6. 
+ * Sista scenen, frågar användaren om den vill spela om spelet från början. 
+ * Samt tömmer "inventory" så att användaren börjar om utan tidigare sparad input. 
  */
 function end() {
     const h1 = document.createElement("h1"); 
@@ -174,7 +185,8 @@ function end() {
 }
 
 /**
- * Knappfunktion som tar emot användarens input och leder vidare till funktionen som hanterar inputen. 
+ * Knappfunktion som tar emot användarens input och leder vidare till funktionen "addToInventory" som hanterar inputen då 
+ * användaren klickar på knappen "add". 
  */
 function addItem() {
     const button = document.getElementById("inputButton"); 
@@ -185,15 +197,15 @@ function addItem() {
 }
 
 /**
- * Hanterar inputen från addItem funktionen. 
- * 
+ * Hanterar inputen från "addItem" funktionen. 
  * Lägger till vad användaren skrivit i "inventory" OM denna artikel finns bland "allItems"-listan. 
- * "allItems"-listan är alla "availableItems"-listor tillsammans.
- * Om inte får användaren ett felmeddelande. 
+ * Användaren får ett meddelande om att artikeln lagts till i deras varukorg. 
+ * Om artikeln inte finns tillgänglig får användaren ett meddelande som informerar om detta. 
+ * Tömmer även input fältet efter varje ny input. 
  */
 function addToInventory() {
     /** 
-     * Array containing the available items 
+     * Array som innehåller det sammanfattade innehållet av alla tidigare "availableItems"-arrays.  
      * @type {Array}
      */
     let allItems = ["apple", "banana", "kiwi", "pear", "pastries", "crackers", "toast", 
@@ -203,15 +215,17 @@ function addToInventory() {
     if(allItems.includes(pickedItem)){
         inventory.push(pickedItem);
         input.value = "";
+        document.getElementById("error").innerHTML = "item added to cart!"; 
+
     } else{
-        alert ("unavailable item");
         input.value = "";
+        document.getElementById("error").innerHTML = "article not available!"; 
     }
 } 
 
 /**
- * Visa varukorg 
  * Knappfunktion där användarens varukorg visas då man klickar på knappen
+ * Varukorgen göms såvida man inte klickar på den. 
  */
 function showCart() {
     let addedItem = (inventory); 
