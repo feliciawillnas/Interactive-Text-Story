@@ -196,7 +196,7 @@ function addToInventory() {
      * Array containing the available items 
      * @type {Array}
      */
-    let allItems = ["apple", "banana", "bread", "pear", "pastries", "crackers", "toast", 
+    let allItems = ["apple", "banana", "kiwi", "pear", "pastries", "crackers", "toast", 
     "sourdough bread", "coca cola", "coffee", "sprite", "wine" ];
     pickedItem = input.value
 
